@@ -1,0 +1,31 @@
+<app-modal [title]=" formMode == 1 ?  'Add Experience' : 'Update Experience'" >
+  <form role="form" [formGroup]="experienceForm">
+    <div class="row">
+      <div class="form-group col-6">
+        <input type="text" class="form-control d-none">
+        <label for="companyName">Compnay Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control rounded-5" [formControl]="companyNameCtrl"
+          [(ngModel)]="experienceInfoModel.companyName">
+        <div *ngIf="companyNameCtrl.invalid && (companyNameCtrl.dirty || companyNameCtrl.touched )">
+          <span class="font-weight-normal text-danger" *ngIf="companyNameCtrl.errors?.['required']">
+            This field is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label for="cityName">City</label>
+        <input type="text" class="form-control rounded-5"
+               [(ngModel)]="experienceInfoModel.city" [formControl]="cityCtrl">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-12">
+        <label for="cityName">Company Field</label>
+        <textarea class="form-control rounded-5" [formControl]="companyFieldCtrl"
+                  [(ngModel)]="experienceInfoModel.companyField"></textarea>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success btn-flat" (click)="AddExperience()" *ngIf="formMode == 1">Add</button>
+    <button type="button" class="btn btn-success btn-flat" (click)="UpdateExperience()" *ngIf="formMode == 2">Update</button>
+  </form>
+</app-modal>

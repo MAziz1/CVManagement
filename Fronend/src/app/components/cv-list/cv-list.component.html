@@ -1,0 +1,45 @@
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"></h3>
+          <div class="card-tools">
+            <a class="btn btn-secondary btn-flat" routerLink="cv-add">Add New CV</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <table datatable [dtOptions]="dtOptions" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>CV Name</th>
+                <th>Full Name</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="cvList.length > 0">
+              <tr *ngFor="let cv of cvList">
+                <td>{{cv.name}}</td>
+                <td>{{cv.personalInformation.fullName}}</td>
+                <td>{{cv.personalInformation.cityName}}</td>
+                <td>{{cv.personalInformation.email}}</td>
+                <td>{{cv.personalInformation.mobileNumber}}</td>
+                <td [width]="300">
+                  <a class="btn btn-danger btn-flat" (click)="Delete(cv.id)">Delete</a> &nbsp;
+                  <a class="btn btn-warning btn-flat" [routerLink]="['cv-add', cv.id]">Update</a>
+                </td>
+              </tr>
+            <tbody *ngIf="cvList.length == 0">
+              <tr class="text-center">
+                <td colspan="5">No data available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

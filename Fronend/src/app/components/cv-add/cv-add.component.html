@@ -1,0 +1,91 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Add New CV</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Add New CV</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <form role="form" [formGroup]="CVAddForm">
+        <div class="card-header">
+          <div class="card-tools">
+            <a type="button" class="btn btn-secondary btn-flat" (click)="OpenAddExperience()">Add Experience</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="cvName">CV Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control rounded-5 col-6" [(ngModel)]="cvModel.name"
+              [formControl]="cvNameCtrl">
+            <div *ngIf="cvNameCtrl.invalid && (cvNameCtrl.dirty || cvNameCtrl.touched )">
+              <span class="font-weight-normal text-danger" *ngIf="cvNameCtrl.errors?.['required']">
+                This field is required
+              </span>
+            </div>
+
+          </div>
+          <hr />
+          <h4>Personal Information</h4>
+          <br />
+          <div class="row">
+            <div class="form-group col-6">
+              <input type="text" class="form-control d-none" id="cvId">
+              <label for="fullName">Full Name<span class="text-danger">*</span></label>
+              <input type="text" class="form-control rounded-5" id="fullName"
+                [(ngModel)]="cvModel.personalInformation.fullName" [formControl]="fullNameCtrl">
+              <div *ngIf="fullNameCtrl.invalid && (fullNameCtrl.dirty || fullNameCtrl.touched )">
+                <span class="font-weight-normal text-danger" *ngIf="fullNameCtrl.errors?.['required']">
+                  This field is required
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="fullName">City Name</label>
+              <input type="text" class="form-control rounded-5" id="cityName"
+                [(ngModel)]="cvModel.personalInformation.cityName" [formControl]="cityNameCtrl">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="email">Email Address</label>
+              <input type="text" class="form-control rounded-5" id="email"
+                [(ngModel)]="cvModel.personalInformation.email" [formControl]="emailCtrl">
+            </div>
+            <div class="form-group col-6">
+              <label for="mobileNumber">Mobile Number<span class="text-danger">*</span></label>
+              <input type="text" class="form-control rounded-5" id="mobileNumber"
+                [(ngModel)]="cvModel.personalInformation.mobileNumber" [formControl]="mobileNumberCtrl">
+              <div *ngIf="mobileNumberCtrl.invalid && (mobileNumberCtrl.dirty || mobileNumberCtrl.touched )">
+                <span class="font-weight-normal text-danger" *ngIf="mobileNumberCtrl.errors?.['required']">
+                  This field is required
+                </span>
+                <span class="font-weight-normal text-danger" *ngIf="mobileNumberCtrl.errors?.['pattern']">
+                  invalid phone number
+                </span>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <h3>Experience Details</h3>
+          <br />
+          <app-experience-list [experienceList]="cvModel.experienceInformation"></app-experience-list>
+        </div>
+        <div class="card-footer">
+          <button *ngIf="formMode == 1" type="button" class="btn btn-success btn-flat" (click)="AddCV()">Create</button>
+          <button *ngIf="formMode == 2" type="button" class="btn btn-success btn-flat" (click)="UpdateCV()">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

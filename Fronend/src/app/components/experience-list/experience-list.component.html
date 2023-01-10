@@ -1,0 +1,23 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <th>Company Name</th>
+    <th>City Name</th>
+    <th>Company Field</th>
+    <th></th>
+  </thead>
+  <tbody *ngIf="experienceList.length > 0">
+    <tr *ngFor="let experience of experienceList" [ngClass]="experience.isDeleted ? 'd-none' : ''">
+      <td>{{experience.companyName}}</td>
+      <td>{{experience.city}}</td>
+      <td>{{experience.companyField}}</td>
+      <td>
+        <button class="btn btn-danger btn-flat" (click)="Delete(experience.id)">Delete</button> &nbsp;
+        <button class="btn btn-warning btn-flat" (click)="OpenUpdateExperienceInfo(experience)">Update</button>
+      </td>
+    </tr>
+    <tbody *ngIf="experienceList.length == 0">
+      <tr class="text-center">
+        <td colspan="4">No data available</td>
+      </tr>
+  </tbody>
+</table>
